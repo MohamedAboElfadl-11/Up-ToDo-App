@@ -6,7 +6,7 @@ class AppStrings {
   static const String getStarted = 'Get Started';
   static const String onBoardingTitleOne = 'Manage Your Tasks';
   static const String onBoardingSubTitleOne =
-      'you can easily manage all of yor daily tasks in DoMe for frr';
+      'you can easily manage all of yor daily tasks in DoMe for free';
   static const String onBoardingTitlTwo = 'Create daily routine';
   static const String onBoardingSubTitlTwo =
       'In UpToDo you can create your personalized routine to stay productive';

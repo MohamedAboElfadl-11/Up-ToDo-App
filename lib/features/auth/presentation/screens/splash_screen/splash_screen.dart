@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (_) => const OnBoardingScreens(),
+          builder: (_) => OnBoardingScreens(),
         ),
       );
     });
