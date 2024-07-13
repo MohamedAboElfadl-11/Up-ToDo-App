@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:todoapp/core/utils/app_assets.dart';
-import 'package:todoapp/core/utils/app_colors.dart';
 import 'package:todoapp/core/utils/app_strings.dart';
 import 'package:todoapp/features/auth/presentation/screens/on_boarding_screens/on_boarding.dart';
 
@@ -37,7 +35,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -50,11 +47,10 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             Text(
               AppStrings.appName,
-              style: GoogleFonts.lato(
-                fontWeight: FontWeight.bold,
-                fontSize: 40.0,
-                color: AppColors.white,
-              ),
+              style: Theme.of(context)
+                  .textTheme
+                  .displayLarge!
+                  .copyWith(fontSize: 40.0),
             ),
           ],
         ),

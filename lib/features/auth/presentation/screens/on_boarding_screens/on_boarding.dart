@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:todoapp/core/utils/app_colors.dart';
 import 'package:todoapp/core/utils/app_strings.dart';
@@ -12,7 +11,6 @@ class OnBoardingScreens extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -33,10 +31,14 @@ class OnBoardingScreens extends StatelessWidget {
                                 child: TextButton(
                                   child: Text(
                                     AppStrings.skip,
-                                    style: GoogleFonts.lato(
-                                      fontSize: 16.0,
-                                      color: AppColors.white.withOpacity(0.44),
-                                    ),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .displaySmall!
+                                        .copyWith(
+                                          fontSize: 16.0,
+                                          color:
+                                              AppColors.white.withOpacity(0.44),
+                                        ),
                                   ),
                                   onPressed: () {
                                     controller.jumpToPage(2);
@@ -73,11 +75,7 @@ class OnBoardingScreens extends StatelessWidget {
                         // Title
                         Text(
                           OnBoardingModel.onBoardingScreensData[index].title,
-                          style: GoogleFonts.lato(
-                            fontSize: 32.0,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.white,
-                          ),
+                          style: Theme.of(context).textTheme.displayLarge,
                         ),
                         const SizedBox(
                           height: 42.0,
@@ -85,10 +83,7 @@ class OnBoardingScreens extends StatelessWidget {
                         // sub title
                         Text(
                           OnBoardingModel.onBoardingScreensData[index].subTitle,
-                          style: GoogleFonts.lato(
-                            fontSize: 16.0,
-                            color: AppColors.white,
-                          ),
+                          style: Theme.of(context).textTheme.displayMedium,
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(
@@ -105,11 +100,14 @@ class OnBoardingScreens extends StatelessWidget {
                                   ? TextButton(
                                       child: Text(
                                         AppStrings.back,
-                                        style: GoogleFonts.lato(
-                                          fontSize: 16.0,
-                                          color:
-                                              AppColors.white.withOpacity(0.44),
-                                        ),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .displaySmall!
+                                            .copyWith(
+                                              fontSize: 16.0,
+                                              color: AppColors.white
+                                                  .withOpacity(0.44),
+                                            ),
                                       ),
                                       onPressed: () {
                                         controller.previousPage(
@@ -125,13 +123,9 @@ class OnBoardingScreens extends StatelessWidget {
                             // next button
                             index != 2
                                 ? ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: AppColors.primary,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(4.0),
-                                      ),
-                                    ),
+                                    style: Theme.of(context)
+                                        .elevatedButtonTheme
+                                        .style,
                                     onPressed: () {
                                       controller.nextPage(
                                         duration:
@@ -141,20 +135,16 @@ class OnBoardingScreens extends StatelessWidget {
                                     },
                                     child: Text(
                                       AppStrings.next,
-                                      style: GoogleFonts.lato(
-                                        fontSize: 16.0,
-                                        color: AppColors.white,
-                                      ),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displaySmall!
+                                          .copyWith(color: AppColors.white),
                                     ),
                                   )
                                 : ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: AppColors.primary,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(4.0),
-                                      ),
-                                    ),
+                                    style: Theme.of(context)
+                                        .elevatedButtonTheme
+                                        .style,
                                     onPressed: () {
                                       // nav to home screen
                                       Navigator.push(
@@ -166,10 +156,10 @@ class OnBoardingScreens extends StatelessWidget {
                                     },
                                     child: Text(
                                       AppStrings.getStarted,
-                                      style: GoogleFonts.lato(
-                                        fontSize: 16.0,
-                                        color: AppColors.white,
-                                      ),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displaySmall!
+                                          .copyWith(color: AppColors.white),
                                     ),
                                   ),
                           ],
