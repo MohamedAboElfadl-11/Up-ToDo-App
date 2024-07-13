@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:todoapp/core/utils/app_assets.dart';
 import 'package:todoapp/core/utils/app_colors.dart';
 import 'package:todoapp/core/utils/app_strings.dart';
+import 'package:todoapp/features/auth/data/model/on_boarding_model.dart';
+import 'package:todoapp/features/tasks/presentation/screens/home_screen.dart';
 
 class OnBoardingScreens extends StatelessWidget {
   OnBoardingScreens({super.key});
@@ -20,31 +21,37 @@ class OnBoardingScreens extends StatelessWidget {
             children: [
               Expanded(
                 child: PageView.builder(
-                  itemCount: 3,
+                  itemCount: OnBoardingModel.onBoardingScreensData.length,
                   controller: controller,
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
                         // textButton skip
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextButton(
-                            child: Text(
-                              AppStrings.skip,
-                              style: GoogleFonts.lato(
-                                fontSize: 16.0,
-                                color: AppColors.white.withOpacity(0.44),
+                        index != 2
+                            ? Align(
+                                alignment: Alignment.centerLeft,
+                                child: TextButton(
+                                  child: Text(
+                                    AppStrings.skip,
+                                    style: GoogleFonts.lato(
+                                      fontSize: 16.0,
+                                      color: AppColors.white.withOpacity(0.44),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    controller.jumpToPage(2);
+                                  },
+                                ),
+                              )
+                            : const SizedBox(
+                                height: 48.0,
                               ),
-                            ),
-                            onPressed: () {},
-                          ),
-                        ),
                         const SizedBox(
                           height: 16.0,
                         ),
                         // On boarding image
                         Image.asset(
-                          AppAssets.onBoardingOne,
+                          OnBoardingModel.onBoardingScreensData[index].imgPath,
                         ),
                         const SizedBox(
                           height: 16.0,
@@ -65,7 +72,7 @@ class OnBoardingScreens extends StatelessWidget {
                         ),
                         // Title
                         Text(
-                          AppStrings.onBoardingTitleOne,
+                          OnBoardingModel.onBoardingScreensData[index].title,
                           style: GoogleFonts.lato(
                             fontSize: 32.0,
                             fontWeight: FontWeight.bold,
@@ -77,56 +84,100 @@ class OnBoardingScreens extends StatelessWidget {
                         ),
                         // sub title
                         Text(
-                          AppStrings.onBoardingSubTitleOne,
+                          OnBoardingModel.onBoardingScreensData[index].subTitle,
                           style: GoogleFonts.lato(
                             fontSize: 16.0,
                             color: AppColors.white,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                         const SizedBox(
                           height: 107.0,
+                        ),
+                        const Spacer(),
+                        // Buttons
+                        Row(
+                          children: [
+                            // back button
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: index != 0
+                                  ? TextButton(
+                                      child: Text(
+                                        AppStrings.back,
+                                        style: GoogleFonts.lato(
+                                          fontSize: 16.0,
+                                          color:
+                                              AppColors.white.withOpacity(0.44),
+                                        ),
+                                      ),
+                                      onPressed: () {
+                                        controller.previousPage(
+                                          duration:
+                                              const Duration(milliseconds: 300),
+                                          curve: Curves.linear,
+                                        );
+                                      },
+                                    )
+                                  : Container(),
+                            ),
+                            const Spacer(),
+                            // next button
+                            index != 2
+                                ? ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: AppColors.primary,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(4.0),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      controller.nextPage(
+                                        duration:
+                                            const Duration(milliseconds: 300),
+                                        curve: Curves.linear,
+                                      );
+                                    },
+                                    child: Text(
+                                      AppStrings.next,
+                                      style: GoogleFonts.lato(
+                                        fontSize: 16.0,
+                                        color: AppColors.white,
+                                      ),
+                                    ),
+                                  )
+                                : ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: AppColors.primary,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(4.0),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      // nav to home screen
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (_) => HomeScreen(),
+                                        ),
+                                      );
+                                    },
+                                    child: Text(
+                                      AppStrings.getStarted,
+                                      style: GoogleFonts.lato(
+                                        fontSize: 16.0,
+                                        color: AppColors.white,
+                                      ),
+                                    ),
+                                  ),
+                          ],
                         ),
                       ],
                     );
                   },
                 ),
-              ),
-              // Buttons
-              Row(
-                children: [
-                  // back button
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: TextButton(
-                      child: Text(
-                        AppStrings.back,
-                        style: GoogleFonts.lato(
-                          fontSize: 16.0,
-                          color: AppColors.white.withOpacity(0.44),
-                        ),
-                      ),
-                      onPressed: () {},
-                    ),
-                  ),
-                  const Spacer(),
-                  // next button
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4.0),
-                      ),
-                    ),
-                    onPressed: () {},
-                    child: Text(
-                      AppStrings.next,
-                      style: GoogleFonts.lato(
-                        fontSize: 16.0,
-                        color: AppColors.white,
-                      ),
-                    ),
-                  ),
-                ],
               ),
             ],
           ),
